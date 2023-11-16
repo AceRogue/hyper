@@ -897,6 +897,54 @@ impl Builder {
         self
     }
 
+    /// Sets the maximum concurrent streams to use for HTTP2.
+    ///
+    /// Passing `None` will do nothing.
+    ///
+    /// If not set, hyper will use a default.
+    #[cfg(feature = "http2")]
+    #[cfg_attr(docsrs, doc(cfg(feature = "http2")))]
+    pub fn http2_max_concurrent_streams(&mut self, sz: u32) -> &mut Self {
+        self.h2_builder.max_concurrent_streams = Some(sz);
+        self
+    }
+
+    /// Sets the maximum header list size to use for HTTP2.
+    ///
+    /// Passing `None` will do nothing.
+    ///
+    /// If not set, hyper will use a default.
+    #[cfg(feature = "http2")]
+    #[cfg_attr(docsrs, doc(cfg(feature = "http2")))]
+    pub fn http2_max_header_list_size(&mut self, sz: u32) -> &mut Self {
+        self.h2_builder.max_header_list_size = sz;
+        self
+    }
+
+    /// Sets the enable push to use for HTTP2.
+    ///
+    /// Passing `None` will do nothing.
+    ///
+    /// If not set, hyper will use a default.
+    #[cfg(feature = "http2")]
+    #[cfg_attr(docsrs, doc(cfg(feature = "http2")))]
+    pub fn http2_enable_push(&mut self, sz: bool) -> &mut Self {
+        self.h2_builder.enable_push = Some(sz);
+        self
+    }
+
+    /// Sets the header table size to use for HTTP2.
+    ///
+    /// Passing `None` will do nothing.
+    ///
+    /// If not set, hyper will use a default.
+    #[cfg(feature = "http2")]
+    #[cfg_attr(docsrs, doc(cfg(feature = "http2")))]
+    pub fn http2_header_table_size(&mut self, sz: u32) -> &mut Self {
+        self.h2_builder.header_table_size = sz;
+        self
+    }
+
     /// Sets an interval for HTTP2 Ping frames should be sent to keep a
     /// connection alive.
     ///

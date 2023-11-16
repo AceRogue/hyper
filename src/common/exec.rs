@@ -29,6 +29,7 @@ pub(crate) type BoxSendFuture = Pin<Box<dyn Future<Output = ()> + Send>>;
 
 // Either the user provides an executor for background tasks, or we use
 // `tokio::spawn`.
+#[allow(dead_code)]
 #[derive(Clone)]
 pub enum Exec {
     Default,
@@ -36,7 +37,7 @@ pub enum Exec {
 }
 
 // ===== impl Exec =====
-
+#[allow(dead_code)]
 impl Exec {
     pub(crate) fn execute<F>(&self, fut: F)
     where

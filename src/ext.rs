@@ -45,6 +45,7 @@ impl Protocol {
         Self { inner }
     }
 
+    #[allow(unused)]
     pub(crate) fn into_inner(self) -> h2::ext::Protocol {
         self.inner
     }

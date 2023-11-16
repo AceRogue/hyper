@@ -107,11 +107,13 @@ pub fn on<T: sealed::CanUpgrade>(msg: T) -> OnUpgrade {
     msg.on_upgrade()
 }
 
+#[allow(unused)]
 #[cfg(any(feature = "http1", feature = "http2"))]
 pub(super) struct Pending {
     tx: oneshot::Sender<crate::Result<Upgraded>>,
 }
 
+#[allow(unused)]
 #[cfg(any(feature = "http1", feature = "http2"))]
 pub(super) fn pending() -> (Pending, OnUpgrade) {
     let (tx, rx) = oneshot::channel();
@@ -120,6 +122,7 @@ pub(super) fn pending() -> (Pending, OnUpgrade) {
 
 // ===== impl Upgraded =====
 
+#[allow(unused)]
 impl Upgraded {
     #[cfg(any(feature = "http1", feature = "http2", test))]
     pub(super) fn new<T>(io: T, read_buf: Bytes) -> Self
@@ -232,6 +235,7 @@ impl fmt::Debug for OnUpgrade {
 
 // ===== impl Pending =====
 
+#[allow(unused)]
 #[cfg(any(feature = "http1", feature = "http2"))]
 impl Pending {
     pub(super) fn fulfill(self, upgraded: Upgraded) {

@@ -22,6 +22,7 @@ struct ErrorImpl {
     connect_info: Option<Connected>,
 }
 
+#[allow(unused)]
 #[derive(Debug)]
 pub(super) enum Kind {
     Parse(Parse),
@@ -94,6 +95,7 @@ pub(super) enum Header {
     TransferEncodingUnexpected,
 }
 
+#[allow(unused)]
 #[derive(Debug)]
 pub(super) enum User {
     /// Error calling user's HttpBody::poll_data().
@@ -261,6 +263,7 @@ impl Error {
         None
     }
 
+    #[allow(unused)]
     #[cfg(feature = "http2")]
     pub(super) fn h2_reason(&self) -> h2::Reason {
         // Find an h2::Reason somewhere in the cause stack, if it exists,
@@ -320,11 +323,13 @@ impl Error {
         Error::new(Kind::ChannelClosed)
     }
 
+    #[allow(unused)]
     #[cfg(any(feature = "http1", feature = "http2", feature = "stream"))]
     pub(super) fn new_body<E: Into<Cause>>(cause: E) -> Error {
         Error::new(Kind::Body).with(cause)
     }
 
+    #[allow(unused)]
     #[cfg(any(feature = "http1", feature = "http2"))]
     pub(super) fn new_body_write<E: Into<Cause>>(cause: E) -> Error {
         Error::new(Kind::BodyWrite).with(cause)

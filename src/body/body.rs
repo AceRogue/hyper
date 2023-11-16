@@ -235,6 +235,7 @@ impl Body {
             .and_then(|extra| extra.delayed_eof.take())
     }
 
+    #[allow(unused)]
     #[cfg(any(feature = "http1", feature = "http2"))]
     fn extra_mut(&mut self) -> &mut Extra {
         self.extra
