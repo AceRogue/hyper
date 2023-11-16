@@ -54,7 +54,7 @@ pub(crate) struct Config {
     pub(crate) adaptive_window: bool,
     pub(crate) initial_conn_window_size: u32,
     pub(crate) initial_stream_window_size: u32,
-    pub(crate) max_frame_size: u32,
+    pub(crate) max_frame_size: Option<u32>,
     #[cfg(feature = "runtime")]
     pub(crate) keep_alive_interval: Option<Duration>,
     #[cfg(feature = "runtime")]
@@ -75,7 +75,7 @@ impl Default for Config {
             adaptive_window: false,
             initial_conn_window_size: DEFAULT_CONN_WINDOW,
             initial_stream_window_size: DEFAULT_STREAM_WINDOW,
-            max_frame_size: DEFAULT_MAX_FRAME_SIZE,
+            max_frame_size: None,
             #[cfg(feature = "runtime")]
             keep_alive_interval: None,
             #[cfg(feature = "runtime")]
@@ -97,7 +97,6 @@ fn new_builder(config: &Config) -> Builder {
     builder
         .initial_window_size(config.initial_stream_window_size)
         .initial_connection_window_size(config.initial_conn_window_size)
-        .max_frame_size(config.max_frame_size)
         .max_send_buffer_size(config.max_send_buffer_size)
         .enable_push(false)
         .max_header_list_size(config.max_header_list_size)
@@ -110,6 +109,9 @@ fn new_builder(config: &Config) -> Builder {
     }
     if let Some(push) = config.enable_push {
         builder.enable_push(push);
+    }
+    if let Some(max) = config.max_frame_size {
+        builder.max_frame_size(max);
     }
     builder
 }
